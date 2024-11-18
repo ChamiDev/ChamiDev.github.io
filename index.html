@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=none">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="Chami">
+    <meta name="description" content="Paginas de Chami">
+    <link rel="icon" href="https://um2410.renderforest.com/u25148551/visuals/9d9af7d1-196b-4b8d-adb6-398414c40274.png" type="image/png">
+    <title>Chami Dev</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .banner {
+            width: 250px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            text-align: center;
+            background-color: #1f1f1f;
+        }
+
+        .banner:hover {
+            transform: translateY(-5px);
+        }
+
+        .banner-header {
+            padding: 10px;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .banner-content {
+            margin-top: 10px;
+        }
+
+        .banner-content p {
+            margin: 5px 0;
+        }
+
+        .click-btn {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 14px;
+        }
+
+        .click-btn:hover {
+            background-color: #555;
+        }
+
+        .banneractivo:hover {
+            box-shadow: 0 4px 8px rgba(0, 150, 0, 0.5);
+        }
+
+        .bannerinfo:hover {
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.5);
+        }
+
+        .privado {
+            color: red;
+            font-size: 13px;
+        }
+
+        .publico {
+            color: green;
+            font-size: 13px;
+        }
+
+        a {
+            color: green;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 15px;
+        }
+
+        a:hover {
+            color: green;
+            font-size: 20px;
+            text-decoration: underline;
+            transform: scale(1.1);
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Banner 1 -->
+    <div class="banner banneractivo">
+        <div class="banner-header" style="background-color: rgba(0, 150, 0, 0.5);">Chax</div>
+        <div class="banner-content">
+            <hr style="margin: 20px;">
+            <p>Chat en tiempo real</p>
+            <br>
+            <p class="publico">Publico</p>
+            <button class="click-btn" onclick="goToLink('https://chamidev.github.io/CHAX/')">Ir al proyecto</button>
+        </div>
+    </div>
+    <!-- x -->
+
+    <!-- Banner 2 -->
+    <div class="banner banneractivo">
+        <div class="banner-header" style="background-color: rgba(0, 150, 0, 0.5);">Chai MB</div>
+        <div class="banner-content">
+            <hr style="margin: 20px;">
+            <p>Realm de Minecraft Bedrock en la version mas reciente</p>
+            <br>
+            <p class="publico">Publico</p>
+            <button class="click-btn" onclick="goToLink('https://chamidev.github.io/Realm/invitar/')">Ir al proyecto</button>
+        </div>
+    </div>
+    <!-- x -->
+
+    <!-- Banner 3 -->
+    <div class="banner banneractivo">
+        <div class="banner-header" style="background-color: rgba(0, 150, 0, 0.5);">Minecraft Bedrock</div>
+        <div class="banner-content">
+            <hr style="margin: 20px;">
+            <p>Descargar Minecraft bedrock gratis<br>Pc & Android</p>
+            <br>
+            <p class="publico">Publico</p>
+            <button class="click-btn" onclick="goToLink('https://chamidev.github.io/MCBE/')">Ir al proyecto</button>
+        </div>
+    </div>
+    <!-- x -->
+
+    <!-- Banner 4 -->
+    <div class="banner banneractivo">
+        <div class="banner-header" style="background-color: rgba(0, 150, 0, 0.5);">T-AnimeL</div>
+        <div class="banner-content">
+            <hr style="margin: 20px;">
+            <p>Nueva plataforma para ver anime o leer mangas<br>By <a href="https://www.instagram.com/agussx0011/">Agussx</a> & <a href="#">TAL Studios</a></p>
+            <br>
+            <p class="publico">Publico</p>
+            <button class="click-btn" onclick="goToLink('https://chamidev.github.io/T-AnimeL/')">Ir al proyecto</button>
+        </div>
+    </div>
+    <!-- x -->
+
+    <!-- Banner 5 -->
+    <div class="banner banneractivo">
+        <div class="banner-header" style="background-color: rgba(0, 150, 0, 0.5);">SLOT</div>
+        <div class="banner-content">
+            <hr style="margin: 20px;">
+            <p>Casino de slots Exclusivo</p>
+            <br>
+            <p class="privado">Privado</p>
+            <button class="click-btn" onclick="goToLink('https://chamidev.github.io/Slot/')">Ir al proyecto</button>
+        </div>
+    </div>
+    <!-- x -->
+    <hr style="width: 100%">
+    <!-- Banner PERMISOS -->
+    <button onclick="goToLink('https://chamidev.github.io/Permisos')" class="banner bannerinfo">
+        <div class="banner-header" style="background-color: rgba(50, 50, 50, 0.5);">Lista De Permisos</div>
+        <div class="banner-content">
+            <hr style="margin: 20px;">
+            <p>Aqui tengo todos los cambios realizados de cada uno de mis proyectos</p>
+        </div>
+    </button>
+    <!-- x -->
+
+    <!-- Banner CHANGELOGS -->
+    <button onclick="goToLink('https://chamidev.github.io/Registro')" class="banner bannerinfo">
+        <div class="banner-header" style="background-color: rgba(50, 50, 50, 0.5);">Registro De Cambios</div>
+        <div class="banner-content">
+            <hr style="margin: 20px;">
+            <p>Aqui pueden ver la lista de personas que tienen acceso a algunos de mis proyectos y los permisos que tienen<br><p style="color: gray; font-size: 12px;">desde el 14/11/2024</p></p>
+        </div>
+    </button>
+    <!-- x -->
+
+    <script>
+        function goToLink(url) {
+            window.location.href = url;
+        }
+    </script>
+</body>
+
+</html>
