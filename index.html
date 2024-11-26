@@ -101,6 +101,71 @@
             text-decoration: underline;
             transform: scale(1.1);
         }
+
+        .lampy-news .banner-header {
+            font-size: 20px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .lampy-news .premios {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .lampy-news .premio {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            min-width: 90%;
+            width: 90%;
+        }
+
+        .lampy-news .premio:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .lampy-news .premio-img {
+            width: 40px;
+            height: auto;
+            filter: drop-shadow(0 0 5px gold);
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .lampy-news .premio-img:hover {
+            transform: rotate(-5deg) scale(1.2);
+            filter: drop-shadow(0 0 10px gold);
+        }
+
+        .lampy-news .premio p {
+            margin: 0;
+            font-size: 14px;
+            color: #e0e0e0;
+        }
+
+        .lampy-news .click-btn {
+            background-color: #0066cc;
+            font-weight: bold;
+            border: none;
+            color: white;
+        }
+
+        .lampy-news .click-btn:hover {
+            background-color: #005bb5;
+            transform: scale(1.05);
+        }
     </style>
 
 </head>
@@ -186,6 +251,34 @@
         </div>
     </div>
     <!-- x -->
+    <hr style="width: 100%">
+
+    <div class="banner banneractivo lampy-news">
+        <div class="banner-header" style="background-color: rgba(50, 50, 50, 0.7);">
+            <img src="https://um2411.renderforest.com/u25148551/visuals/045da1b8-fcae-493a-82d9-ef719a56de92.ico" style="width: 20px; vertical-align: middle; margin-right: 5px;"> Lampy News
+            <img src="https://um2411.renderforest.com/u25148551/visuals/045da1b8-fcae-493a-82d9-ef719a56de92.ico" style="width: 20px; vertical-align: middle; margin-left: 5px;">
+        </div>
+        <div class="banner-content">
+            <hr style="margin: 20px; border-color: rgba(255, 255, 255, 0.2);">
+            <p><strong>Noticiero del año</strong></p>
+            <br>
+            <p><strong>Ganador de 2 Martín Fierros</strong></p>
+            <div class="premios">
+                <div class="premio">
+                    <img src="https://www.martinfierro.com.ar/img/estatuilla.png" alt="Premio" class="premio-img">
+                    <p>Mejor Dirección<br>(Jonathan Encina)</p>
+                </div>
+                <div class="premio">
+                    <img src="https://www.martinfierro.com.ar/img/estatuilla.png" alt="Premio" class="premio-img">
+                    <p>Mejor Noticiero</p>
+                </div>
+            </div>
+            <br>
+            <p class="publico">Público</p>
+            <button class="click-btn" onclick="goToLink('https://chamidev.github.io/LN/')">Ver</button>
+        </div>
+    </div>
+
     <hr style="width: 100%">
     <!-- Banner PERMISOS -->
     <button onclick="goToLink('https://chamidev.github.io/Permisos')" class="banner bannerinfo">
