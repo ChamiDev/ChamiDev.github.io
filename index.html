@@ -1,4 +1,5 @@
-<html lang="es"><head>
+<html lang="es">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=none">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -6,7 +7,6 @@
     <meta name="description" content="Paginas de Chami">
     <link rel="icon" href="https://um2412.renderforest.com/u25148551/visuals/1d5a4184-ed36-4d1a-9096-a7fe65f7fcb6.png" type="image/png">
     <title>Chami Dev</title>
-
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -100,7 +100,7 @@
         }
 
         .lampy-news {
-            width: 80%;
+            width: 250px;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
@@ -139,25 +139,30 @@
             border-radius: 8px;
             padding: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            min-width: 90%;
-            width: 90%;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, width 0.3s ease-in-out;
+            position: relative;
+            overflow: hidden;
+            min-width: 17%;
+            width: 17%;
         }
 
         .lampy-news .premio:hover {
             transform: scale(1.05);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+            min-width: 90%;
+            width: 90%;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, width 0.3s ease-in-out;
         }
 
         .lampy-news .premio-img {
             width: 40px;
             height: auto;
             filter: drop-shadow(0 0 px gold);
-            transition: transform 0.3s ease, filter 0.3s ease;
+            transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
         }
 
         .lampy-news .premio-img:hover {
-            transform: rotate(-5deg) scale(1.2);
+            transform: rotate(-5deg) scale(2);
             filter: drop-shadow(0 0 10px gold);
         }
 
@@ -165,6 +170,14 @@
             margin: 0;
             font-size: 14px;
             color: #e0e0e0;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            transform: translateY(10px);
+        }
+
+        .lampy-news .premio:hover p {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .lampy-news .click-btn {
@@ -172,7 +185,7 @@
             font-weight: bold;
             border: none;
             color: white;
-            transition: transform 0.3s ease, filter 0.3s ease;
+            transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
         }
 
         .lampy-news .click-btn:hover {
@@ -180,86 +193,57 @@
             transform: scale(1.05);
         }
     </style>
-
 </head>
-
 <body>
-
-    <!-- Banner 1 -->
     <div class="banner banneractivo">
-        <div class="banner-header" style="background-color: rgba(50, 50, 50, 0.5);"><img src="https://um2411.renderforest.com/u25148551/visuals/7c0e8ce1-8e0f-4e2d-a585-b1fda1763022.png" style="width: 15px;"> Chax <img src="https://um2411.renderforest.com/u25148551/visuals/7c0e8ce1-8e0f-4e2d-a585-b1fda1763022.png" style="width: 15px;"></div>
+        <div class="banner-header" style="background-color: rgba(50, 50, 50, 0.5);"><img src="https://um2025.renderforest.com/u25148551/visuals/1a9c1f68-0b8f-4a15-ac61-fed91aa6c67d.png" style="height: 100px;"></div>
         <div class="banner-content">
             <hr style="margin: 20px;">
-            <p>Chat en tiempo real</p>
+            <p>Chat minimalista</p>
             <br>
-            <p class="publico">Proximamente</p>
+            <p class="publico">Servidor Activo</p>
             <button class="click-btn" onclick="goToLink('https://chamidev.github.io/CHAX/')">Ir al proyecto</button>
         </div>
     </div>
-    <!-- x -->
-
-    <!-- Banner 2 -->
     <div class="banner banneractivo">
-        <div class="banner-header" style="background-color: rgba(50, 50, 50, 0.5);"><img src="https://um2409.renderforest.com/u25148551/visuals/cdc04bf4-da0c-4722-9eba-61651e8ce3ac.png" style="width: 15px;"> Chai MB <img src="https://um2409.renderforest.com/u25148551/visuals/cdc04bf4-da0c-4722-9eba-61651e8ce3ac.png" style="width: 15px;"></div>
+        <div class="banner-header" style="background-color: rgba(50, 50, 50, 0.5);"><img src="https://cdn.apexminecrafthosting.com/img/uploads/2019/01/09151341/636586921809294617.png" style="height: 40px;"></div>
         <div class="banner-content">
             <hr style="margin: 20px;">
-            <p>Realm de Minecraft Bedrock en la version mas reciente</p>
+            <p>Descargar Minecraft bedrock gratis para Pc & Android</p>
             <br>
-            <p class="publico">Publico</p>
-            <button class="click-btn" onclick="goToLink('https://chamidev.github.io/Realm/')">Ir al proyecto</button>
-        </div>
-    </div>
-    <!-- x -->
-
-    <!-- Banner 3 -->
-    <div class="banner banneractivo">
-        <div class="banner-header" style="background-color: rgba(50, 50, 50, 0.5);"><img src="https://um2411.renderforest.com/u25148551/visuals/dd0cdb5c-351f-449a-a2c7-781d2502e3d7.jpg" style="width: 15px;"> Minecraft Bedrock <img src="https://um2411.renderforest.com/u25148551/visuals/dd0cdb5c-351f-449a-a2c7-781d2502e3d7.jpg" style="width: 15px;"></div>
-        <div class="banner-content">
-            <hr style="margin: 20px;">
-            <p>Descargar Minecraft bedrock gratis<br>Pc &amp; Android</p>
-            <br>
-            <p class="publico">Publico</p>
+            <p class="publico">Gratis</p>
             <button class="click-btn" onclick="goToLink('https://chamidev.github.io/MCBE/')">Ir al proyecto</button>
         </div>
     </div>
-    <!-- x -->
-
-    <!-- Banner 4 -->
     <div class="banner banneractivo">
-        <div class="banner-header" style="background-color: rgba(50, 50, 50, 0.5);"><img src="https://um2410.renderforest.com/u25148551/visuals/10453dca-62cc-4b48-a63b-4412caefc6c0.png" style="width: 15px;"> T-AnimeL <img src="https://um2410.renderforest.com/u25148551/visuals/10453dca-62cc-4b48-a63b-4412caefc6c0.png" style="width: 15px;"></div>
+        <div class="banner-header" style="background-color: rgba(50, 50, 50, 0.5);"><img src="https://um2025.renderforest.com/u25148551/visuals/687ae4b9-a33f-46e3-9d8d-e2edd7853748.png" style="height: 100px;"></div>
         <div class="banner-content">
             <hr style="margin: 20px;">
             <p>Nueva plataforma para ver anime o leer mangas<br>By <a href="https://www.instagram.com/agussx0011/">Agussx</a> &amp; <a href="https://www.instagram.com/yosoychami/">Chami</a></p>
             <br>
-            <p class="publico">Publico</p>
+            <p class="publico">Activo</p>
             <button class="click-btn" onclick="goToLink('https://chamidev.github.io/T-AnimeL/Cargando.html')">Ir al proyecto</button>
         </div>
     </div>
-    <!-- x -->
-
-    <!-- Banner 5 -->
     <div class="banner banneractivo">
-        <div class="banner-header" style="background-color: rgba(50, 50, 50, 0.5);"><img src="https://dl.dir.freefiremobile.com/common/test/official/FF_SHORT_LOGO.PNG.png" style="width: 15px;"> T25 <img src="https://dl.dir.freefiremobile.com/common/test/official/FF_SHORT_LOGO.PNG.png" style="width: 15px;"> </div>
+        <div class="banner-header" style="background-color: rgba(50, 50, 50, 0.5);"><img src="https://um2025.renderforest.com/u25148551/visuals/6928f090-012a-482d-b26f-9c27455fa3f4.png" style="height: 100px;"> </div>
         <div class="banner-content">
             <hr style="margin: 20px;">
-            <p>Tabla de puntaje T25</p>
+            <p>Tabla de puntajes y estadisticas de la FFL</p>
             <br>
-            <p class="publico">Publico</p>
-            <p class="privado"> 2025</p>
-            <button class="click-btn" onclick="goToLink('https://chamidev.github.io/FF/Cargando.html')">Ir al proyecto</button>
+            <p class="publico">Participantes locales</p>
+            <p class="privado"> 25 de enero - 25 de diciembre</p>
+            <button class="click-btn" onclick="goToLink('https://chamidev.github.io/FF/Cargando.html')">Ver Tabla de Puntuaciones</button>
         </div>
     </div>
-    <!-- x -->
     <hr style="width: 100%">
-
     <div class="lampy-news">
         <div class="banner-header" style="background-color: rgba(50, 50, 50, 0.7);">
-            <img src="https://um2411.renderforest.com/u25148551/visuals/045da1b8-fcae-493a-82d9-ef719a56de92.ico" style="width: 20px; vertical-align: middle; margin-right: 5px;"> Lampy News
-            <img src="https://um2411.renderforest.com/u25148551/visuals/045da1b8-fcae-493a-82d9-ef719a56de92.ico" style="width: 20px; vertical-align: middle; margin-left: 5px;">
+            <img src="https://um2411.renderforest.com/u25148551/visuals/045da1b8-fcae-493a-82d9-ef719a56de92.ico" style="height: 100px;">
         </div>
         <div class="banner-content">
             <hr style="margin: 20px; border-color: rgba(255, 255, 255, 0.2);">
-            <p><strong>Noticiero del año</strong></p>
+            <p><strong>Lampy News<br>Noticiero del año</strong></p>
             <br>
             <p><strong>Ganador de 2 Martín Fierros</strong></p>
             <div class="premios">
@@ -273,56 +257,14 @@
                 </div>
             </div>
             <br>
-            <p class="publico">Público</p>
+            <p class="publico">Proyecto Escolar</p>
             <button class="click-btn" onclick="goToLink('https://chamidev.github.io/LN/')">Ver</button>
         </div>
     </div>
-
-    <hr style="width: 100%">
-
-    <!-- promo -->
-    <section id="promo">
-        <button style="width: 100%;" onclick="goToLink('https://www.movistar.com.ar/prepago/promo-linea-prepaga?aux_utm_campaign=AR_PREPAGO_COL-NOCLIENTES-CHIP-MOVISTAR-B2C_24-01-01_SEM_LDS-WEB_AON_BBDD_BRAND_106009&amp;adgroupid=58700006109025041&amp;keyword=p72981149281&amp;lid=43700072981149281&amp;ds_s_kwgid=58700006109025041&amp;&amp;ds_e_adid=460447515524&amp;ds_e_matchtype=search&amp;ds_e_device=c&amp;ds_e_network=g&amp;&amp;ds_url_v=2&amp;gclsrc=aw.ds&amp;gad_source=1&amp;gclid=Cj0KCQiAr7C6BhDRARIsAOUKifj1Ie_KyKjXny9Qo-GtLYWVBalxqt_G3fwGRqrg_RKq_vCu2loh3nMaAsMYEALw_wcB')" class="banner banneractivo">
-        <div class="banner-header" style="background-color: rgba(50, 50, 50, 0.5);"><img src="https://www.movistar.com.ar/documents/10180/99839205/Movistar_Logo.svg" style="width: 100px;"> <h1>Movistar </h1><br><img src="https://www.movistar.com.ar/documents/10180/103493085/chip.png" style="width: 100px;"><br>Tu plan incluye:
-<br><h6>$2.000 de crédito promocional
-<br>WhatsApp gratis
-<br>Llamadas ilimitadas a líneas Movistar
-<br>Minutos para llamadas a todas las compañías<img src="https://www.movistar.com.ar/documents/10180/103493085/redes.png" style="width: 100%;"></h6>
-todo por $4.000
-
-Por mes durante 3 meses
-</div>
-        <div class="banner-content">    </div>
-        </button>
-    </section>
-    <!-- x -->
-    <hr style="width: 100%;">
-    <!-- Banner PERMISOS -->
-    <button onclick="goToLink('https://chamidev.github.io/Permisos')" class="banner bannerinfo">
-        <div class="banner-header" style="background-color: rgba(50, 50, 50, 0.5);">Lista De Permisos</div>
-        <div class="banner-content">
-            <hr style="margin: 20px;">
-            <p>Aqui tengo todos los cambios realizados de cada uno de mis proyectos</p>
-        </div>
-    </button>
-    <!-- x -->
-
-    <!-- Banner CHANGELOGS -->
-    <button onclick="goToLink('https://chamidev.github.io/Registro')" class="banner bannerinfo">
-        <div class="banner-header" style="background-color: rgba(50, 50, 50, 0.5);">Registro De Cambios</div>
-        <div class="banner-content">
-            <hr style="margin: 20px;">
-            <p>Aqui pueden ver la lista de personas que tienen acceso a algunos de mis proyectos y los permisos que tienen<br></p><p style="color: gray; font-size: 12px;">desde el 14/11/2024</p><p></p>
-        </div>
-    </button>
-    <!-- x -->
-
     <script>
         function goToLink(url) {
             window.location.href = url;
         }
     </script>
-
-
-
-</body></html>
+</body>
+</html>
