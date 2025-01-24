@@ -1,15 +1,133 @@
-    <div class="platforms">
-        <img src="https://um2025.renderforest.com/u25148551/visuals/c01dec77-1c10-4c76-b07b-008c02877457.webp" alt="Windows" class="platform-icon" />
-        <img src="https://upload.wikimedia.org/wikipedia/commons/8/88/Deus_Linux.png" alt="Linux" class="platform-icon" />
-        <img src="https://um2025.renderforest.com/u25148551/visuals/4ef17c5b-0dc9-469e-81ee-7dff9c784633.png" alt="iPhone" class="platform-icon" />
-        <img src="https://cdn.pixabay.com/photo/2021/10/20/01/20/mac-os-logo-6724894_960_720.png" alt="Mac" class="platform-icon" />
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/66/Android_robot.png" alt="Android" class="platform-icon" />
-        <img src="https://www.computerhope.com/jargon/c/chrome-os.png" alt="Chrome OS" class="platform-icon" />
-        <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/PlayStation_5_logo_and_wordmark.svg" alt="PS5" class="platform-icon" />
-        <img src="https://logodownload.org/wp-content/uploads/2017/05/playstation-4-logo-ps4.png" alt="PS4" class="platform-icon" />
-        <img src="https://um2025.renderforest.com/u25148551/visuals/549eac03-7691-4dfb-bf6b-ad29267d1013.png" alt="PS3" class="platform-icon" />
-        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Xbox_one_logo.svg" alt="Xbox" class="platform-icon" />
-        <img src="https://static.wikia.nocookie.net/logopedia/images/b/b2/HMOS.svg" alt="Harmony OS" class="platform-icon" />
-        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Google_Chrome_icon_%28February_2022%29.svg" alt="Chrome" class="platform-icon" />
-        <img src="https://img.icons8.com/?size=48&id=17949&format=png" alt="Google" class="platform-icon" />
-    </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Katana Login</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+      max-width: 400px;
+      width: 100%;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      font-weight: lighter;
+    }
+
+    #loginButton {
+      background-color: #24292f;
+      color: white;
+      font-size: 1.1rem;
+      padding: 15px 25px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s ease;
+    }
+
+    #loginButton:hover {
+      background-color: #0366d6;
+      transform: translateY(-5px);
+    }
+
+    #loginButton:active {
+      transform: translateY(2px);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+
+      #loginButton {
+        font-size: 1rem;
+        padding: 12px 22px;
+      }
+    }
+  </style>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+    import { getAuth, signInWithPopup, GithubAuthProvider, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAywEaaUfUNvZIjhCq3atNbhJ2oovL-ZXU",
+      authDomain: "call-katana.firebaseapp.com",
+      projectId: "call-katana",
+      storageBucket: "call-katana.firebaseapp.com",
+      messagingSenderId: "1013994355498",
+      appId: "1:1013994355498:web:766d8b95d01cdb32f53c53",
+      measurementId: "G-0JHFNC6PD3",
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GithubAuthProvider();
+
+    document.getElementById("loginButton").addEventListener("click", () => {
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          console.log("Sesión iniciada:", result.user.displayName);
+          window.close();
+        })
+        .catch((error) => {
+          console.error("Error al iniciar sesión:", error.message);
+        });
+    });
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log("Usuario logueado:", user.displayName);
+        window.close();
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>Bienvenido a Katana</h1>
+    <p>Inicia sesión con GitHub para continuar</p>
+    <button id="loginButton">Iniciar sesión con GitHub</button>
+  </div>
+</body>
+</html>
