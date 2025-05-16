@@ -1,2 +1,2 @@
-RealmID1 = "6YLPC5etBLUggA8";  // Magic Realms
-RealmID2 = "EjemploIDNuevo123";  // One Block
+const MAGIC_CRAFT = "6YLPC5etBLUggA8";
+const ONE_BLOCK = "EjemploIDNuevo123";
