@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Evaluación: Terrorismo de Estado en Argentina (1976-1983)</title>
+  <style>
+    :root{font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color:#0b1220}
+    body{max-width:900px;margin:32px auto;padding:24px;background:#fbfbfe;border-radius:12px;box-shadow:0 6px 30px rgba(12,15,30,0.06)}
+    h1{font-size:1.6rem;margin:0 0 8px}
+    p.lead{margin:0 0 18px;color:#374151}
+    form{display:grid;gap:18px}
+    .card{background:white;border-radius:10px;padding:14px;border:1px solid #eceff6}
+    .q{margin:0}
+    .options{margin-top:8px;display:flex;flex-direction:column;gap:6px}
+    label.option{display:flex;align-items:center;gap:10px;padding:8px;border-radius:8px;border:1px solid transparent}
+    input[type=radio]{accent-color:#0b5cff}
+    .controls{display:flex;gap:10px;align-items:center}
+    button{background:#0b5cff;color:white;border:none;padding:10px 12px;border-radius:8px;cursor:pointer}
+    button.secondary{background:#f1f5f9;color:#0b1220;border:1px solid #e6eefc}
+    .result{padding:12px;margin-top:8px;border-radius:8px;background:#f8fafc;border:1px solid #e6eefc}
+    .correct{background:#ecfdf5;border:1px solid #bbf7d0}
+    .incorrect{background:#fff1f2;border:1px solid #fecaca}
+    .answer-key{font-size:0.95rem;color:#075985;margin-top:6px}
+    footer{margin-top:18px;color:#6b7280;font-size:0.9rem}
+    @media (max-width:600px){body{margin:12px;padding:18px}}
+  </style>
+</head>
+<body>
+  <h1>Evaluación: Terrorismo de Estado en Argentina (1976-1983)</h1>
+  <p class="lead">Seleccioná la respuesta correcta y presioná <strong>Corregir</strong>.</p>
+
+  <form id="quiz" class="card" autocomplete="off">
+    <div id="questions"></div>
+
+    <div class="controls">
+      <button type="button" id="checkBtn">Corregir</button>
+      <button type="button" id="resetBtn" class="secondary">Reiniciar</button>
+      <button type="button" id="showKey" class="secondary">Mostrar/Ocultar respuestas</button>
+      <div id="scoreBox" style="margin-left:auto;font-weight:600"></div>
+    </div>
+
+    <div id="feedback" aria-live="polite"></div>
+  </form>
+
+  <footer>Creado con información suministrada por el usuario.</footer>
+
+  <script>
+    const quizData = [
+      {q:'Durante el gobierno de Isabel Perón, ¿qué grupo guerrillero actuaba en el país?',opts:['FARC','Triple A','ERP y Montoneros','ETA'],a:2},
+      {q:'¿Qué operativo de 1975 es considerado un antecedente directo del terrorismo de Estado?',opts:['Operativo Cóndor','Operativo Independencia','Operativo Malvinas','Operativo Libertad'],a:1},
+      {q:'¿Cómo se autodenominó la dictadura iniciada el 24 de marzo de 1976?',opts:['Proceso de Reorganización Nacional','Patria Nueva','Revolución Restauradora','Gobierno de Emergencia'],a:0},
+      {q:'¿Quién representaba al Ejército en la Junta Militar del golpe de 1976?',opts:['Galtieri','Videla','Bignone','Massera'],a:1},
+      {q:'Una de las primeras medidas de la dictadura fue:',opts:['Apertura democrática','Toque de queda y censura','Convocatoria a elecciones','Reforma agraria'],a:1},
+      {q:'El terrorismo de Estado se caracterizó por ser:',opts:['Una respuesta espontánea a la violencia guerrillera','Un plan sistemático de represión y desapariciones','Un proceso judicial transparente','Un conflicto entre dos gobiernos'],a:1},
+      {q:'El método central de represión utilizado por la dictadura fue:',opts:['La censura económica','Los bombardeos urbanos','La desaparición forzada de personas','La guerra abierta en las calles'],a:2},
+      {q:'La llamada “Teoría de los Dos Demonios” planteaba que:',opts:['Los civiles eran responsables del golpe','Había igualdad de fuerzas entre Estado y guerrilla','El Estado era un demonio que luchaba contra el demonio de la subversión','Los desaparecidos eran delincuentes comunes'],a:2},
+      {q:'La frase “Algo habrá hecho” refleja:',opts:['La defensa activa de la sociedad','La indiferencia o miedo ante las desapariciones','Un apoyo explícito a los guerrilleros','Una crítica al régimen militar'],a:1},
+      {q:'¿Qué organización de derechos humanos comenzó a marchar en 1977 en Plaza de Mayo?',opts:['Abuelas de Plaza de Mayo','H.I.J.O.S.','Madres de Plaza de Mayo','CELS'],a:2},
+      {q:'¿Qué evento utilizó la dictadura para mejorar su imagen internacional?',opts:['Las Olimpiadas 1980','El Mundial de Fútbol 1978','La Expo 82','El Rally Dakar'],a:1},
+      {q:'Durante la Guerra Fría, ¿qué país apoyó indirectamente a la dictadura bajo la Doctrina de la Seguridad Nacional?',opts:['Reino Unido','Estados Unidos','URSS','España'],a:1},
+      {q:'¿Qué consecuencia económica tuvo el modelo de la dictadura?',opts:['Reducción de deuda externa','Crecimiento generalizado','Empobrecimiento y aumento de deuda externa','Estabilización de precios'],a:2},
+      {q:'La Guerra de Malvinas ocurrió en:',opts:['1976','1980','1982','1983'],a:2},
+      {q:'¿Quién ganó las elecciones democráticas de 1983?',opts:['Menem','Alfonsín','Galtieri','Illia'],a:1}
+    ];
+
+    const questionsEl=document.getElementById('questions');
+    const scoreBox=document.getElementById('scoreBox');
+    const feedback=document.getElementById('feedback');
+
+    function renderQuiz(){
+      questionsEl.innerHTML='';
+      quizData.forEach((item,i)=>{
+        const c=document.createElement('section');
+        c.className='card';
+        c.innerHTML=`
+          <p class='q'><strong>${i+1}.</strong> ${escapeHtml(item.q)}</p>
+          <div class='options'>
+            ${item.opts.map((opt,j)=>`
+              <label class='option'>
+                <input type='radio' name='q${i}' value='${j}' />
+                <span>${escapeHtml(opt)}</span>
+              </label>`).join('')}
+          </div>
+          <div class='answer-key' data-index='${i}' style='display:none'>Respuesta correcta: <strong>${escapeHtml(item.opts[item.a])}</strong></div>`;
+        questionsEl.appendChild(c);
+      });
+    }
+
+    function escapeHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+    function grade(){
+      let correct=0;
+      feedback.innerHTML='';
+
+      quizData.forEach((item,i)=>{
+        const sel=document.querySelector(`input[name='q${i}']:checked`);
+        const sec=questionsEl.children[i];
+        sec.classList.remove('correct','incorrect');
+        sec.querySelectorAll('label.option').forEach(l=>l.style.borderColor='transparent');
+
+        if(sel){
+          const val=Number(sel.value);
+          if(val===item.a){correct++;sec.classList.add('correct');sel.closest('label').style.borderColor='#86efac';}
+          else{sec.classList.add('incorrect');sel.closest('label').style.borderColor='#fecaca';const ci=sec.querySelector(`input[value='${item.a}']`);if(ci)ci.closest('label').style.borderColor='#86efac';}
+        } else {
+          sec.classList.add('incorrect');const ci=sec.querySelector(`input[value='${item.a}']`);if(ci)ci.closest('label').style.borderColor='#86efac';
+        }
+      });
+
+      const pct=Math.round((correct/quizData.length)*100);
+      scoreBox.textContent=`Puntaje: ${correct}/${quizData.length} (${pct}%)`;
+      feedback.innerHTML=`<div class='result'>Obtuviste <strong>${correct}</strong> respuestas correctas (${pct}%).</div>`;
+    }
+
+    function resetQuiz(){
+      document.querySelectorAll('input[type=radio]').forEach(i=>i.checked=false);
+      scoreBox.textContent='';
+      feedback.innerHTML='';
+      document.querySelectorAll('label.option').forEach(l=>l.style.borderColor='transparent');
+      document.querySelectorAll('.card').forEach(c=>c.classList.remove('correct','incorrect'));
+    }
+
+    function toggleKey(){document.querySelectorAll('.answer-key').forEach(el=>el.style.display=(el.style.display==='none')?'block':'none');}
+
+    document.getElementById('checkBtn').addEventListener('click',grade);
+    document.getElementById('resetBtn').addEventListener('click',resetQuiz);
+    document.getElementById('showKey').addEventListener('click',toggleKey);
+
+    renderQuiz();
+  </script>
+</body>
+</html>
