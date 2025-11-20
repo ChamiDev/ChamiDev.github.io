@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Evaluación: Terrorismo Islámico — Origen y Contexto</title>
+  <style>
+    :root{font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color:#0b1220}
+    body{max-width:900px;margin:32px auto;padding:24px;background:#fbfbfe;border-radius:12px;box-shadow:0 6px 30px rgba(12,15,30,0.06)}
+    h1{font-size:1.6rem;margin:0 0 8px}
+    p.lead{margin:0 0 18px;color:#374151}
+    form{display:grid;gap:18px}
+    .card{background:white;border-radius:10px;padding:14px;border:1px solid #eceff6}
+    .q{margin:0}
+    .options{margin-top:8px;display:flex;flex-direction:column;gap:6px}
+    label.option{display:flex;align-items:center;gap:10px;padding:8px;border-radius:8px;border:1px solid transparent}
+    input[type=radio]{accent-color:#0b5cff}
+    .controls{display:flex;gap:10px;align-items:center}
+    button{background:#0b5cff;color:white;border:none;padding:10px 12px;border-radius:8px;cursor:pointer}
+    button.secondary{background:#f1f5f9;color:#0b1220;border:1px solid #e6eefc}
+    .result{padding:12px;margin-top:8px;border-radius:8px;background:#f8fafc;border:1px solid #e6eefc}
+    .correct{background:#ecfdf5;border:1px solid #bbf7d0}
+    .incorrect{background:#fff1f2;border:1px solid #fecaca}
+    .answer-key{font-size:0.95rem;color:#075985;margin-top:6px}
+    footer{margin-top:18px;color:#6b7280;font-size:0.9rem}
+    @media (max-width:600px){body{margin:12px;padding:18px}}
+  </style>
+</head>
+<body>
+  <h1>Evaluación: Terrorismo Islámico — Origen y Contexto</h1>
+  <p class="lead">Seleccioná la respuesta correcta en cada pregunta y presioná <strong>Corregir</strong>.</p>
+
+  <form id="quiz" class="card" autocomplete="off">
+    <!-- Questions will be injected here by script -->
+    <div id="questions"></div>
+
+    <div class="controls">
+      <button type="button" id="checkBtn">Corregir</button>
+      <button type="button" id="resetBtn" class="secondary">Reiniciar</button>
+      <button type="button" id="showKey" class="secondary">Mostrar/Ocultar respuestas</button>
+      <div id="scoreBox" style="margin-left:auto;font-weight:600"></div>
+    </div>
+
+    <div id="feedback" aria-live="polite"></div>
+  </form>
+
+  <footer>Creado con información suministrada por el usuario.</footer>
+
+  <script>
+    // Preguntas, opciones y respuestas (índice según 0..3)
+    const quizData = [
+      {q: '¿Qué logró Mahoma durante su liderazgo en la Península Arábiga?', opts: ['Convertirse en el primer califa de la historia','Unificar las tribus árabes bajo el Islam','Conquistar Europa occidental','Fundar el Imperio Otomano'], a:1},
+      {q: 'Tras la muerte de Mahoma, los califas iniciaron una expansión que alcanzó territorios desde…', opts: ['China hasta Sudáfrica','La Península Ibérica hasta la India','Rusia hasta Egipto','Grecia hasta Japón'], a:1},
+      {q: 'La “Gran Yihad” se refiere principalmente a:', opts: ['La guerra ofensiva contra los no musulmanes','La lucha interna y espiritual del creyente','La conquista de nuevos territorios','La obligación del ayuno'], a:1},
+      {q: 'Según el Corán, en la “Pequeña Yihad” está prohibido:', opts: ['Combatir de noche','Hablar con no musulmanes','Matar civiles, mujeres y niños','Defenderse de agresiones externas'], a:2},
+      {q: 'Los grupos extremistas como ISIS distorsionan la yihad porque la interpretan como:', opts: ['Un esfuerzo espiritual individual','Una guerra perpetua y ofensiva','Un llamado a la convivencia pacífica','Un estudio del Corán'], a:1},
+      {q: '¿Cuál de las siguientes religiones monoteístas es la más antigua?', opts: ['Cristianismo','Islam','Judaísmo','Budismo'], a:2},
+      {q: 'El Islam surgió alrededor del año:', opts: ['100 d.C.','622 d.C.','1492 d.C.','3000 a.C.'], a:1},
+      {q: 'Para los musulmanes, Mahoma es considerado:', opts: ['El hijo de Dios','Un líder político sin influencia religiosa','El “Sello de los Profetas”','El fundador del Cristianismo'], a:2},
+      {q: 'El libro sagrado del Islam es:', opts: ['La Biblia','El Torá','El Corán','El Talmud'], a:2},
+      {q: '¿Cuántas oraciones diarias establece el pilar del Salat?', opts: ['3','5','7','10'], a:1},
+      {q: 'La Kaaba es:', opts: ['Un templo judío','La tumba de Mahoma','Un edificio cúbico sagrado en La Meca','Una mezquita en Jerusalén'], a:2},
+      {q: 'El uso del hijab se considera principalmente:', opts: ['Una obligación militar','Una práctica de modestia','Un mandato universal para cubrir todo el cuerpo','Una tradición exclusivamente europea'], a:1},
+      {q: 'La poligamia permitida por el Corán establece que un hombre puede tener hasta:', opts: ['Dos esposas','Cuatro esposas','Ocho esposas','Ninguna esposa'], a:1},
+      {q: 'El principal objetivo del terrorismo es:', opts: ['Reemplazar religiones antiguas','Generar miedo para lograr fines políticos o ideológicos','Hacer cumplir los pilares del Islam','Impulsar la economía global'], a:1},
+      {q: 'Los atentados del 11 de septiembre de 2001 son un ejemplo de:', opts: ['Terrorismo yihadista contemporáneo','Guerra entre estados','Conflicto territorial europeo','Lucha espiritual musulmana'], a:0}
+    ];
+
+    const questionsEl = document.getElementById('questions');
+    const scoreBox = document.getElementById('scoreBox');
+    const feedback = document.getElementById('feedback');
+
+    function renderQuiz(){
+      questionsEl.innerHTML = '';
+      quizData.forEach((item, i) => {
+        const container = document.createElement('section');
+        container.className = 'card';
+        container.innerHTML = `
+          <p class="q"><strong>${i+1}.</strong> ${escapeHtml(item.q)}</p>
+          <div class="options" role="radiogroup" aria-label="Pregunta ${i+1}">
+            ${item.opts.map((opt, j) => `\
+              <label class="option">\
+                <input type="radio" name="q${i}" value="${j}" />\
+                <span>${escapeHtml(opt)}</span>\
+              </label>`).join('')}
+          </div>
+          <div class="answer-key" data-index="${i}" style="display:none">Respuesta correcta: <strong>${escapeHtml(item.opts[item.a])}</strong></div>
+        `;
+        questionsEl.appendChild(container);
+      });
+    }
+
+    function escapeHtml(str){
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    function grade(){
+      let correct = 0;
+      feedback.innerHTML = '';
+      quizData.forEach((item,i) => {
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+        const section = questionsEl.children[i];
+        section.classList.remove('correct','incorrect');
+        // remove previous highlights
+        section.querySelectorAll('label.option').forEach(l => { l.style.borderColor='transparent'; });
+
+        if(selected){
+          const val = Number(selected.value);
+          if(val === item.a){
+            correct++;
+            section.classList.add('correct');
+            selected.closest('label').style.borderColor = '#86efac';
+          } else {
+            section.classList.add('incorrect');
+            selected.closest('label').style.borderColor = '#fecaca';
+            // highlight correct option
+            const correctInput = section.querySelector(`input[value="${item.a}"]`);
+            if(correctInput) correctInput.closest('label').style.borderColor = '#86efac';
+          }
+        } else {
+          // unanswered
+          section.classList.add('incorrect');
+          // highlight correct option
+          const correctInput = section.querySelector(`input[value="${item.a}"]`);
+          if(correctInput) correctInput.closest('label').style.borderColor = '#86efac';
+        }
+      });
+
+      const percent = Math.round((correct / quizData.length) * 100);
+      scoreBox.textContent = `Puntaje: ${correct} / ${quizData.length} (${percent}%)`;
+      feedback.innerHTML = `<div class="result">Obtuviste <strong>${correct}</strong> respuestas correctas. ${percent}%.</div>`;
+    }
+
+    function resetQuiz(){
+      document.querySelectorAll('input[type=radio]').forEach(i=>i.checked=false);
+      scoreBox.textContent = '';
+      feedback.innerHTML = '';
+      // reset borders
+      document.querySelectorAll('label.option').forEach(l=>l.style.borderColor='transparent');
+      document.querySelectorAll('.card').forEach(c=>{c.classList.remove('correct','incorrect')});
+    }
+
+    function toggleKey(){
+      document.querySelectorAll('.answer-key').forEach(el=>{
+        el.style.display = (el.style.display === 'none')? 'block' : 'none';
+      });
+    }
+
+    // Event bindings
+    document.getElementById('checkBtn').addEventListener('click', grade);
+    document.getElementById('resetBtn').addEventListener('click', resetQuiz);
+    document.getElementById('showKey').addEventListener('click', toggleKey);
+
+    // Render on load
+    renderQuiz();
+  </script>
+</body>
+</html>
